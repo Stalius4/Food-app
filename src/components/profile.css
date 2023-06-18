@@ -1,0 +1,62 @@
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .profile-header {
+    text-align: center;
+  }
+  
+  .profile-details {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .profile-avatar {
+    flex: 0 0 120px;
+    margin-right: 20px;
+  }
+  
+  .profile-avatar img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-bio {
+    margin-bottom: 20px;
+  }
+  
+  .profile-stats {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-stats li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+  }
