@@ -7,12 +7,17 @@ import {
 import Cookies from "universal-cookie";
 import { useState } from "react";
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import {useDispatch} from "react-redux"
+import {setUserId} from "./features/users"
+
 
 import "./auth.css"; // Import the CSS file
 
 const cookies = new Cookies();
 
-export const Auth = ({ isAuth, setIsAuth, setId }) => {
+export const Auth = ({ isAuth, setIsAuth, setId, id }) => {
+const dispatch = useDispatch()
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,23 +31,39 @@ export const Auth = ({ isAuth, setIsAuth, setId }) => {
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
 
+      const result = await signInWithPopup(auth, googleProvider);
       cookies.set("auth-token", result.user.refreshToken);
       setIsAuth(cookies.get("auth-token"));
-      console.log(result.user);
+    
+
+
 
       const customId = result.user.uid; // Specify your custom document ID
 
       const docRef = doc(db, "users", customId); // Use the custom ID for the document reference
       const docSnap = await getDoc(docRef);
+      dispatch(setUserId({
+        id:customId, //taking users Id from auth and storing to redux state 
+        first: docSnap.data().first, // taking data from user collection and storing in redux state
+        last:docSnap.data().last
+      }
+      )
+      )
+
+
+
+console.log(docSnap.data().first, "docksnap")
+
 
       if (docSnap.exists()) {
         console.log("Document already exists: ", docRef.id);
       } else {
         await setDoc(docRef, {
          
-          email:result.user.email
+          email:result.user.email,
+          first:"",
+          last:"",
         });
         console.log("Document created with ID: ", docRef.id);
       }

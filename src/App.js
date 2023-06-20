@@ -63,7 +63,8 @@ if(!isAuth){
 
   return (
     <div className="App">
-<Auth isAuth= {isAuth} setIsAuth={setIsAuth} setId={setId}></Auth>
+<Auth isAuth= {isAuth} setIsAuth={setIsAuth} setId={setId}
+ id={id}></Auth>
 
     </div>
   );
